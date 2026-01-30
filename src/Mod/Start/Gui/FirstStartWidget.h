@@ -29,6 +29,7 @@
 
 class QLabel;
 class QPushButton;
+class QFrame;
 
 namespace StartGui
 {
@@ -44,9 +45,14 @@ public:
     bool eventFilter(QObject* object, QEvent* event) override;
     Q_SIGNAL void dismissed();
 
+private Q_SLOTS:
+    void onOpenTutorialsClicked();
+    void onOpenDocumentationClicked();
+
 private:
     void retranslateUi();
     void setupUi();
+    QWidget* createQuickTipsWidget();
 
     ThemeSelectorWidget* _themeSelectorWidget;
     GeneralSettingsWidget* _generalSettingsWidget;
@@ -54,6 +60,10 @@ private:
     QLabel* _welcomeLabel;
     QLabel* _descriptionLabel;
     QPushButton* _doneButton;
+    QPushButton* _tutorialsButton;
+    QPushButton* _docsButton;
+    QFrame* _quickTipsFrame;
+    QLabel* _quickTipsLabel;
 };
 
 }  // namespace StartGui

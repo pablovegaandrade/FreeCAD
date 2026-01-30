@@ -1,0 +1,765 @@
+/*
+FreeCAD Modern Stylesheet
+============================================================================================================
+A contemporary, clean stylesheet for FreeCAD with improved UX
+Designed for better readability, modern aesthetics, and user comfort
+
+Features:
+- Larger touch targets for better usability
+- Softer color transitions
+- Improved contrast and accessibility
+- Modern rounded corners and shadows
+- Better visual hierarchy
+
+============================================================================================================
+*/
+
+/* Reset and Base Styles
+--------------------------------------------------------------------------- */
+* {
+  border-style: none;
+  border-image: none;
+  border-radius: 0px;
+  border-color: @GeneralBorderColor;
+  outline: none;
+  color: @TextForegroundColor;
+  selection-background-color: @TextSelectBackgroundColor;
+  selection-color: @TextForegroundColor;
+  gridline-color: @GeneralGridLinesColor;
+}
+
+/* Main Window
+--------------------------------------------------------------------------- */
+QMainWindow,
+QDockWidget {
+  background-color: @PrimaryColor;
+}
+
+QDialog {
+  background-color: @DialogBackgroundColor;
+}
+
+/* QToolTip - Modern floating appearance
+--------------------------------------------------------------------------- */
+QToolTip {
+  background-color: @PrimaryColor;
+  border: 1px solid @GeneralBorderColor;
+  font-weight: normal;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* QStatusBar - Clean bottom bar
+--------------------------------------------------------------------------- */
+QStatusBar {
+  border-style: none;
+  background-color: @PrimaryColor;
+  padding: 2px;
+}
+
+QStatusBar::item {
+  border-style: none;
+}
+
+QStatusBar QLabel {
+  background-color: transparent;
+  padding: 0 8px;
+}
+
+QStatusBar QPushButton {
+  min-width: 0;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+/* QMenuBar - Modern menu styling
+--------------------------------------------------------------------------- */
+QMenuBar {
+  background-color: @MenuBackgroundColor;
+  padding: 2px 0;
+}
+
+QMenuBar::item {
+  background-color: transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin: 2px;
+}
+
+QMenuBar::item:selected {
+  background-color: @AccentBackgroundColor;
+}
+
+QMenuBar::item:pressed {
+  background-color: @AccentBackgroundColor;
+}
+
+/* QMenu - Dropdown menus with modern appearance
+--------------------------------------------------------------------------- */
+QMenu {
+  border: 1px solid @GeneralBorderColor;
+  background-color: @MenuBackgroundColor;
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+QMenu::separator {
+  height: 1px;
+  background-color: @GroupboxBorderColor;
+  margin: 8px 12px;
+}
+
+QMenu::item {
+  background-color: transparent;
+  padding: 8px 16px 8px 12px;
+  border-radius: 4px;
+  margin: 2px 8px;
+}
+
+QMenu::item:selected {
+  background-color: @AccentBackgroundColor;
+}
+
+QMenu::icon {
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+QMenu::right-arrow {
+  margin: 5px;
+  padding-left: 12px;
+  image: url(qss:@IconsLocationFolderName/arrow-right-@StylesheetIconsColor.svg);
+  height: 10px;
+  width: 10px;
+}
+
+/* QToolBar - Modern toolbar with better spacing
+--------------------------------------------------------------------------- */
+QToolBar {
+  background-color: @PrimaryColor;
+  border-bottom: 1px solid @GeneralBorderColor;
+  padding: 4px;
+  spacing: 4px;
+}
+
+QToolBar:horizontal {
+  padding: 6px;
+}
+
+QToolBar:vertical {
+  padding: 6px;
+  border-right: 1px solid @GeneralBorderColor;
+  border-bottom: none;
+}
+
+QToolBar::separator:horizontal {
+  width: 1px;
+  margin: 4px 8px;
+  background-color: @GeneralBorderColor;
+}
+
+QToolBar::separator:vertical {
+  height: 1px;
+  margin: 8px 4px;
+  background-color: @GeneralBorderColor;
+}
+
+QToolBar::handle:horizontal {
+  width: 10px;
+  image: url(qss:@IconsLocationFolderName/hmovetoolbar-lightgray.svg);
+}
+
+QToolBar::handle:vertical {
+  height: 10px;
+  image: url(qss:@IconsLocationFolderName/vmovetoolbar-lightgray.svg);
+}
+
+/* QToolButton - Larger, more accessible buttons
+--------------------------------------------------------------------------- */
+QToolBar QToolButton {
+  background-color: transparent;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  margin: 1px;
+}
+
+QToolBar QToolButton:hover {
+  background-color: @GeneralBackgroundHoverColor;
+  border: 1px solid @ButtonBorderColor;
+}
+
+QToolBar QToolButton:pressed {
+  background-color: @PrimaryColorDarken2;
+  border: 1px solid @ButtonBorderColor;
+}
+
+QToolBar QToolButton:checked {
+  background-color: @AccentBackgroundColor;
+  border: 1px solid @AccentColor;
+}
+
+/* QPushButton - Modern button styling
+--------------------------------------------------------------------------- */
+QPushButton {
+  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 @ButtonTopBackgroundColor, stop:1 @ButtonBottomBackgroundColor);
+  border: 1px solid @ButtonBorderColor;
+  border-radius: 6px;
+  padding: 8px 16px;
+  min-width: 80px;
+  min-height: 24px;
+}
+
+QPushButton:hover {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QPushButton:pressed {
+  background-color: @PrimaryColorDarken2;
+}
+
+QPushButton:default {
+  background-color: @AccentColor;
+  color: @TextForegroundColor;
+  border: 1px solid @AccentColor;
+}
+
+QPushButton:default:hover {
+  background-color: palette(dark);
+}
+
+QPushButton:disabled {
+  background-color: @GeneralDisabledBackgroundColor;
+  color: @TextDisabledColor;
+}
+
+/* QLineEdit, QTextEdit, QPlainTextEdit - Modern input fields
+--------------------------------------------------------------------------- */
+QLineEdit, QTextEdit, QPlainTextEdit {
+  background-color: @TextEditFieldBackgroundColor;
+  padding: 8px 12px;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 6px;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
+  border: 2px solid @AccentColor;
+  padding: 7px 11px;
+}
+
+QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled {
+  background-color: @GeneralDisabledBackgroundColor;
+  color: @TextDisabledColor;
+}
+
+/* QComboBox - Modern dropdown styling
+--------------------------------------------------------------------------- */
+QComboBox {
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 6px;
+  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 @ButtonTopBackgroundColor, stop:1 @ButtonBottomBackgroundColor);
+  padding: 6px 12px;
+  padding-right: 24px;
+  min-height: 24px;
+}
+
+QComboBox:hover {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QComboBox:focus {
+  border: 2px solid @AccentColor;
+  padding: 5px 11px;
+  padding-right: 23px;
+}
+
+QComboBox::drop-down {
+  subcontrol-origin: padding;
+  subcontrol-position: top right;
+  width: 24px;
+  border: none;
+}
+
+QComboBox::down-arrow {
+  image: url(qss:@IconsLocationFolderName/arrow-down-lightgray.svg);
+  width: 12px;
+  height: 12px;
+}
+
+QComboBox::down-arrow:hover {
+  image: url(qss:@IconsLocationFolderName/arrow-down-@StylesheetIconsColor.svg);
+}
+
+/* QTabWidget & QTabBar - Modern tabs
+--------------------------------------------------------------------------- */
+QTabWidget {
+  padding: 0;
+}
+
+QTabWidget::pane {
+  background-color: @PrimaryColor;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 8px;
+  top: -1px;
+}
+
+QTabBar::tab {
+  background-color: @InActiveTabBackgroundColor;
+  border: 1px solid @GeneralBorderColor;
+  padding: 10px 16px;
+  margin-right: 2px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+QTabBar::tab:selected {
+  background-color: @ActiveTabBackgroundColor;
+  border-bottom: 1px solid @ActiveTabBackgroundColor;
+  font-weight: bold;
+}
+
+QTabBar::tab:hover:!selected {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QTabBar::close-button {
+  border: none;
+  margin: 4px;
+  image: url(qss:@IconsLocationFolderName/close-lightgray.svg);
+}
+
+QTabBar::close-button:hover {
+  image: url(qss:@IconsLocationFolderName/close-red.svg);
+}
+
+/* QGroupBox - Modern card-like appearance
+--------------------------------------------------------------------------- */
+QGroupBox {
+  background-color: @GroupboxBackgroundColor;
+  border-radius: 8px;
+  border: 1px solid @GroupboxBorderColor;
+  margin-top: 24px;
+  padding-top: 8px;
+}
+
+QGroupBox::title {
+  subcontrol-origin: margin;
+  subcontrol-position: top left;
+  padding: 4px 12px;
+  left: 12px;
+  top: 8px;
+  font-weight: bold;
+}
+
+/* QCheckBox & QRadioButton - Better touch targets
+--------------------------------------------------------------------------- */
+QCheckBox, QRadioButton {
+  color: @TextForegroundColor;
+  padding: 4px;
+  spacing: 10px;
+}
+
+QCheckBox::indicator, QRadioButton::indicator {
+  width: 18px;
+  height: 18px;
+  border: 2px solid @CheckBoxBorderColor;
+  background-color: @CheckBoxBackgroundColor;
+}
+
+QCheckBox::indicator {
+  border-radius: 4px;
+}
+
+QRadioButton::indicator {
+  border-radius: 10px;
+}
+
+QCheckBox::indicator:checked {
+  background-color: @AccentColor;
+  image: url(qss:@IconsLocationFolderName/check-mark-@StylesheetIconsColor.svg);
+}
+
+QRadioButton::indicator:checked {
+  background-color: @AccentColor;
+  border: 2px solid @AccentColor;
+}
+
+QCheckBox::indicator:hover, QRadioButton::indicator:hover {
+  border: 2px solid @AccentColor;
+}
+
+/* QScrollBar - Thinner, modern scrollbars
+--------------------------------------------------------------------------- */
+QScrollBar:vertical {
+  background-color: transparent;
+  width: 12px;
+  margin: 0;
+}
+
+QScrollBar:horizontal {
+  background-color: transparent;
+  height: 12px;
+  margin: 0;
+}
+
+QScrollBar::handle:vertical {
+  background-color: @ScrollbarBackgroundColor;
+  border-radius: 4px;
+  min-height: 32px;
+  margin: 2px;
+}
+
+QScrollBar::handle:horizontal {
+  background-color: @ScrollbarBackgroundColor;
+  border-radius: 4px;
+  min-width: 32px;
+  margin: 2px;
+}
+
+QScrollBar::handle:hover {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+  height: 0;
+  width: 0;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+  background: none;
+}
+
+/* QSlider - Modern slider styling
+--------------------------------------------------------------------------- */
+QSlider::groove:horizontal {
+  background-color: @GeneralBorderColor;
+  height: 6px;
+  border-radius: 3px;
+}
+
+QSlider::groove:vertical {
+  background-color: @GeneralBorderColor;
+  width: 6px;
+  border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+  background-color: @AccentColor;
+  width: 18px;
+  height: 18px;
+  margin: -6px 0;
+  border-radius: 9px;
+}
+
+QSlider::handle:vertical {
+  background-color: @AccentColor;
+  width: 18px;
+  height: 18px;
+  margin: 0 -6px;
+  border-radius: 9px;
+}
+
+QSlider::handle:hover {
+  background-color: palette(dark);
+}
+
+QSlider::sub-page:horizontal {
+  background-color: @AccentColor;
+  border-radius: 3px;
+}
+
+QSlider::add-page:vertical {
+  background-color: @AccentColor;
+  border-radius: 3px;
+}
+
+/* QSpinBox, QDoubleSpinBox - Modern number inputs
+--------------------------------------------------------------------------- */
+QAbstractSpinBox, QSpinBox, QDoubleSpinBox {
+  background-color: @TextEditFieldBackgroundColor;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 6px;
+  padding: 6px 8px;
+  padding-right: 28px;
+}
+
+QAbstractSpinBox:focus {
+  border: 2px solid @AccentColor;
+  padding: 5px 7px;
+  padding-right: 27px;
+}
+
+QAbstractSpinBox::up-button, QAbstractSpinBox::down-button {
+  background-color: transparent;
+  width: 24px;
+  border: none;
+}
+
+QAbstractSpinBox::up-button:hover, QAbstractSpinBox::down-button:hover {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QAbstractSpinBox::up-arrow {
+  image: url(qss:@IconsLocationFolderName/arrow-up-lightgray.svg);
+  width: 10px;
+  height: 10px;
+}
+
+QAbstractSpinBox::down-arrow {
+  image: url(qss:@IconsLocationFolderName/arrow-down-lightgray.svg);
+  width: 10px;
+  height: 10px;
+}
+
+/* QDockWidget - Modern dock styling
+--------------------------------------------------------------------------- */
+QDockWidget {
+  border: 1px solid @GeneralBorderColor;
+  titlebar-close-icon: url(qss:@IconsLocationFolderName/transparent.svg);
+  titlebar-normal-icon: url(qss:@IconsLocationFolderName/transparent.svg);
+}
+
+QDockWidget::title {
+  padding: 8px 12px;
+  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 @ButtonTopBackgroundColor, stop:1 @ButtonBottomBackgroundColor);
+  text-align: left;
+  font-weight: bold;
+}
+
+QDockWidget::close-button, QDockWidget::float-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 4px;
+}
+
+QDockWidget::close-button {
+  image: url(qss:@IconsLocationFolderName/close-@StylesheetIconsColor.svg);
+}
+
+QDockWidget::close-button:hover {
+  image: url(qss:@IconsLocationFolderName/close-red.svg);
+}
+
+QDockWidget::float-button {
+  image: url(qss:@IconsLocationFolderName/undock-@StylesheetIconsColor.svg);
+}
+
+QDockWidget::float-button:hover {
+  image: url(qss:@IconsLocationFolderName/undock-blue.svg);
+}
+
+/* QTreeView, QListView, QTableView - Modern data views
+--------------------------------------------------------------------------- */
+QTreeView, QListView, QTableView {
+  background-color: @PrimaryColor;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 6px;
+  alternate-background-color: @GeneralAlternateBackgroundColor;
+  selection-background-color: @AccentBackgroundColor;
+}
+
+QTreeView::item, QListView::item, QTableView::item {
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+QTreeView::item:hover, QListView::item:hover, QTableView::item:hover {
+  background-color: @AccentHoverColor;
+}
+
+QTreeView::item:selected, QListView::item:selected, QTableView::item:selected {
+  background-color: @AccentBackgroundColor;
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+  border-image: none;
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+  border-image: none;
+}
+
+/* QHeaderView - Modern table headers
+--------------------------------------------------------------------------- */
+QHeaderView {
+  background-color: transparent;
+}
+
+QHeaderView::section {
+  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 @ButtonTopBackgroundColor, stop:1 @ButtonBottomBackgroundColor);
+  padding: 8px 12px;
+  border: none;
+  border-bottom: 1px solid @GeneralBorderColor;
+  border-right: 1px solid @GeneralBorderColor;
+  font-weight: bold;
+}
+
+QHeaderView::section:hover {
+  background-color: @GeneralBackgroundHoverColor;
+}
+
+QHeaderView::down-arrow {
+  image: url(qss:@IconsLocationFolderName/arrow-down-lightgray.svg);
+  width: 12px;
+  height: 12px;
+}
+
+QHeaderView::up-arrow {
+  image: url(qss:@IconsLocationFolderName/arrow-up-lightgray.svg);
+  width: 12px;
+  height: 12px;
+}
+
+/* QProgressBar - Modern progress indicator
+--------------------------------------------------------------------------- */
+QProgressBar {
+  background-color: @GeneralBorderColor;
+  border: none;
+  border-radius: 6px;
+  height: 12px;
+  text-align: center;
+}
+
+QProgressBar::chunk {
+  background-color: @AccentColor;
+  border-radius: 6px;
+}
+
+/* Start Page Specific Styles
+--------------------------------------------------------------------------- */
+QWidget#thumbnailWidget {
+  background-color: @GroupboxBackgroundColor;
+  border-radius: 12px;
+  border: 1px solid @GeneralBorderColor;
+}
+
+QWidget#thumbnailWidget:hover {
+  border: 2px solid @AccentColor;
+}
+
+#CreateNewRow > QPushButton {
+  border-radius: 8px;
+  min-height: 80px;
+  min-width: 140px;
+  padding: 12px;
+}
+
+#CreateNewRow > QPushButton:hover {
+  background-color: @AccentBackgroundColor;
+  border: 2px solid @AccentColor;
+}
+
+/* Tutorial Cards */
+QFrame#TutorialCard {
+  background-color: @GroupboxBackgroundColor;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 12px;
+}
+
+QFrame#TutorialCard:hover {
+  border: 2px solid @AccentColor;
+  background-color: @AccentHoverColor;
+}
+
+/* First Start Widget */
+QGroupBox#FirstStartWidget {
+  background-color: @PrimaryColor;
+  border-radius: 16px;
+  border: 1px solid @GeneralBorderColor;
+  padding: 24px;
+  max-width: 600px;
+}
+
+/* Quick Tips Frame */
+QFrame#QuickTipsFrame {
+  background-color: @AccentHoverColor;
+  border: 1px solid @AccentColor;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* MDI Sub Windows */
+QMdiSubWindow {
+  border: 2px solid @GeneralBorderColor;
+  border-radius: 8px;
+  background-color: @PrimaryColor;
+}
+
+QMdiSubWindow:active {
+  border: 2px solid @AccentColor;
+}
+
+/* Sketcher States */
+Gui--StatefulLabel[state="fully_constrained"] {
+  color: @SketcherFullyConstrainedColor;
+  font-weight: bold;
+}
+
+Gui--StatefulLabel[state="under_constrained"] {
+  color: @SketcherUnderConstrainedColor;
+}
+
+Gui--StatefulLabel[state="conflicting_constraints"] {
+  color: @SketcherConflictingConstraintsColor;
+  font-weight: bold;
+}
+
+/* URL Labels */
+Gui--UrlLabel {
+  color: @TextUrlColor;
+  text-decoration: underline;
+}
+
+/* Notification Label */
+Gui--NotificationLabel {
+  background-color: @PrimaryColor;
+  border: 1px solid @GeneralBorderColor;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Task Panel */
+QSint--ActionGroup QFrame[class="header"] {
+  border: 1px solid @GeneralBorderColor;
+  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 @ButtonTopBackgroundColor, stop:1 @ButtonBottomBackgroundColor);
+  border-radius: 6px 6px 0 0;
+}
+
+QSint--ActionGroup QFrame[class="content"] {
+  background-color: @DialogBackgroundColor;
+  border: 1px solid @GeneralBorderColor;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 8px;
+}
+
+QSint--ActionGroup QToolButton[class="header"] {
+  text-align: left;
+  font-weight: bold;
+  border: none;
+  padding: 8px;
+}
+
+/* Input Validation */
+QLineEdit[validationState="error"],
+QComboBox[validationState="error"] {
+  border: 2px solid #d93025;
+}
+
+QLineEdit[validationState="error"]:focus,
+QComboBox[validationState="error"]:focus {
+  border: 2px solid #ff3b30;
+}
+
+/* Property Editor */
+Gui--PropertyEditor--PropertyEditor {
+  qproperty-groupTextColor: @TextForegroundColor;
+  qproperty-groupBackground: @GeneralHeaderBackgroundColor;
+}
+
+/* Workbench Tab Bar */
+#WbTabBar #WbTabBarMore {
+  padding-right: 12px;
+}

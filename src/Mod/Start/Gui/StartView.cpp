@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <QCheckBox>
+#include <QDesktopServices>
 #include <QFrame>
 #include <QGridLayout>
 #include <QLabel>
@@ -33,6 +34,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QTimer>
+#include <QUrl>
 #include <QWidget>
 #include <QStackedWidget>
 #include <QShowEvent>
@@ -43,6 +45,9 @@
 #include "FirstStartWidget.h"
 #include "FlowLayout.h"
 #include "NewFileButton.h"
+#include "TutorialWidget.h"
+
+#include <QTabWidget>
 #include <App/DocumentObject.h>
 #include <App/Application.h>
 #include <Base/Interpreter.h>
@@ -154,6 +159,14 @@ StartView::StartView(QWidget* parent)
     documentsContentLayout->addWidget(examplesListWidget);
 
     documentsContentLayout->setSpacing(static_cast<int>(cardSpacing));
+
+    // Learn section with tutorials
+    _learnLabel = gsl::owner<QLabel*>(new QLabel());
+    documentsContentLayout->addWidget(_learnLabel);
+    
+    _tutorialWidget = gsl::owner<TutorialWidget*>(new TutorialWidget(this));
+    documentsContentLayout->addWidget(_tutorialWidget);
+
     documentsContentLayout->addStretch();
 
 
@@ -200,7 +213,7 @@ StartView::StartView(QWidget* parent)
     retranslateUi();
 }
 
-void StartView::configureNewFileButtons(QLayout* layout) const
+void StartView::configureNewFileButtons(QLayout* layout)
 {
     auto newEmptyFile = gsl::owner<NewFileButton*>(new NewFileButton(
         {tr("Empty File"),
@@ -230,6 +243,11 @@ void StartView::configureNewFileButtons(QLayout* layout) const
          tr("Creates an architectural project"),
          QLatin1String(":/icons/BIMWorkbench.svg")}
     ));
+    auto learn = gsl::owner<NewFileButton*>(new NewFileButton(
+        {tr("Learn FreeCAD"),
+         tr("Interactive tutorials and getting started guides"),
+         QLatin1String(":/icons/help-browser.svg")}
+    ));
 
     // TODO: Ensure all of the required WBs are actually available
     layout->addWidget(partDesign);
@@ -238,6 +256,7 @@ void StartView::configureNewFileButtons(QLayout* layout) const
     layout->addWidget(arch);
     layout->addWidget(newEmptyFile);
     layout->addWidget(openFile);
+    layout->addWidget(learn);
 
     connect(newEmptyFile, &QPushButton::clicked, this, &StartView::newEmptyFile);
     connect(openFile, &QPushButton::clicked, this, &StartView::openExistingFile);
@@ -245,6 +264,14 @@ void StartView::configureNewFileButtons(QLayout* layout) const
     connect(assembly, &QPushButton::clicked, this, &StartView::newAssemblyFile);
     connect(draft, &QPushButton::clicked, this, &StartView::newDraftFile);
     connect(arch, &QPushButton::clicked, this, &StartView::newArchFile);
+    connect(learn, &QPushButton::clicked, this, &StartView::openLearnPage);
+}
+
+void StartView::openLearnPage()
+{
+    // Scroll to the tutorial widget section on the current page
+    // or open the wiki directly
+    QDesktopServices::openUrl(QUrl(QStringLiteral("https://wiki.freecad.org/Getting_started")));
 }
 
 void StartView::configureFileCardWidget(QListView* fileCardWidget)
@@ -509,6 +536,7 @@ void StartView::retranslateUi()
     _newFileLabel->setText(h1Start + tr("New File") + h1End);
     _examplesLabel->setText(h1Start + tr("Examples") + h1End);
     _recentFilesLabel->setText(h1Start + tr("Recent Files") + h1End);
+    _learnLabel->setText(h1Start + tr("Learn & Tutorials") + h1End);
 
     auto hGrp = App::GetApplication().GetParameterGroupByPath(
         "User parameter:BaseApp/Preferences/Mod/Start"

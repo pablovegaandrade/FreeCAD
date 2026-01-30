@@ -42,6 +42,7 @@ class QMdiSubWindow;
 class QScrollArea;
 class QStackedWidget;
 class QPushButton;
+class QTabWidget;
 
 namespace Gui
 {
@@ -50,6 +51,8 @@ class Document;
 
 namespace StartGui
 {
+
+class TutorialWidget;
 
 class StartGuiExport StartView: public Gui::MDIView
 {
@@ -85,7 +88,8 @@ protected:
     void changeEvent(QEvent* e) override;
     void showEvent(QShowEvent* event) override;
 
-    void configureNewFileButtons(QLayout* layout) const;
+    void configureNewFileButtons(QLayout* layout);
+    void openLearnPage();
     static void configureFileCardWidget(QListView* fileCardWidget);
     void configureRecentFilesListWidget(QListView* recentFilesListWidget, QLabel* recentFilesLabel);
     void configureExamplesListWidget(QListView* examplesListWidget);
@@ -117,6 +121,11 @@ private:
     QLabel* _customFolderLabel;
     QPushButton* _openFirstStart;
     QCheckBox* _showOnStartupCheckBox;
+    
+    // Tutorial section
+    QTabWidget* _tabWidget;
+    TutorialWidget* _tutorialWidget;
+    QLabel* _learnLabel;
 
     bool isInitialized = false;
 
